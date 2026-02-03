@@ -1,1 +1,529 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+
+:root {
+    /* Surface */
+    --bg-surface: 0, 0%, 100%;
+    --text-main: 0, 0%, 0%;
+
+    /* Neutral - Scale from White to Black */
+    --neutral-50: 0, 0%, 98%;
+    --neutral-100: 0, 0%, 95%;
+    --neutral-200: 0, 0%, 90%;
+    --neutral-300: 0, 0%, 80%;
+    --neutral-400: 0, 0%, 60%;
+    --neutral-500: 0, 0%, 50%;
+    --neutral-600: 0, 0%, 40%;
+    --neutral-700: 0, 0%, 30%;
+    --neutral-800: 0, 0%, 20%;
+    --neutral-900: 0, 0%, 10%;
+
+    /* Primary - Strong Black */
+    --primary-50: 0, 0%, 95%;
+    --primary-100: 0, 0%, 90%;
+    --primary-200: 0, 0%, 80%;
+    --primary-300: 0, 0%, 70%;
+    --primary-400: 0, 0%, 60%;
+    --primary-500: 0, 0%, 0%;
+    --primary-600: 0, 0%, 10%;
+    --primary-700: 0, 0%, 20%;
+    --primary-800: 0, 0%, 30%;
+    --primary-900: 0, 0%, 40%;
+
+    /* Success - Grey Scale (Darker for emphasis) */
+    --success-50: 0, 0%, 96%;
+    --success-100: 0, 0%, 90%;
+    --success-200: 0, 0%, 80%;
+    --success-300: 0, 0%, 70%;
+    --success-400: 0, 0%, 60%;
+    --success-500: 0, 0%, 30%;
+    --success-600: 0, 0%, 25%;
+    --success-700: 0, 0%, 20%;
+    --success-800: 0, 0%, 15%;
+    --success-900: 0, 0%, 10%;
+
+    /* Warning - Grey Scale */
+    --warning-50: 0, 0%, 95%;
+    --warning-100: 0, 0%, 90%;
+    --warning-200: 0, 0%, 80%;
+    --warning-300: 0, 0%, 70%;
+    --warning-400: 0, 0%, 60%;
+    --warning-500: 0, 0%, 40%;
+    --warning-600: 0, 0%, 30%;
+    --warning-700: 0, 0%, 20%;
+    --warning-800: 0, 0%, 10%;
+    --warning-900: 0, 0%, 0%;
+
+    /* Danger - Grey Scale (Black) */
+    --danger-50: 0, 0%, 95%;
+    --danger-100: 0, 0%, 90%;
+    --danger-200: 0, 0%, 80%;
+    --danger-300: 0, 0%, 70%;
+    --danger-400: 0, 0%, 60%;
+    --danger-500: 0, 0%, 0%;
+    --danger-600: 0, 0%, 10%;
+    --danger-700: 0, 0%, 20%;
+    --danger-800: 0, 0%, 30%;
+    --danger-900: 0, 0%, 40%;
+
+    /* Accent - Grey Scale */
+    --accent-50: 0, 0%, 98%;
+    --accent-100: 0, 0%, 95%;
+    --accent-200: 0, 0%, 90%;
+    --accent-300: 0, 0%, 80%;
+    --accent-400: 0, 0%, 70%;
+    --accent-500: 0, 0%, 50%;
+    --accent-600: 0, 0%, 40%;
+    --accent-700: 0, 0%, 30%;
+    --accent-800: 0, 0%, 20%;
+    --accent-900: 0, 0%, 10%;
+
+    /* Gold - Grey Scale */
+    --gold-50: 0, 0%, 97%;
+    --gold-100: 0, 0%, 92%;
+    --gold-200: 0, 0%, 84%;
+    --gold-300: 0, 0%, 73%;
+    --gold-400: 0, 0%, 62%;
+    --gold-500: 0, 0%, 53%;
+    --gold-600: 0, 0%, 45%;
+    --gold-700: 0, 0%, 37%;
+    --gold-800: 0, 0%, 29%;
+    --gold-900: 0, 0%, 20%;
+
+    /* Glass Variables */
+    --glass-bg: rgba(255, 255, 255, 0.9);
+    --glass-border: rgba(0, 0, 0, 0.1);
+    --card-shadow: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] {
+    /* Neutral (Inverted) */
+    --neutral-50: 0, 0%, 10%;
+    --neutral-100: 0, 0%, 15%;
+    --neutral-200: 0, 0%, 20%;
+    --neutral-300: 0, 0%, 30%;
+    --neutral-400: 0, 0%, 40%;
+    --neutral-500: 0, 0%, 50%;
+    --neutral-600: 0, 0%, 60%;
+    --neutral-700: 0, 0%, 70%;
+    --neutral-800: 0, 0%, 80%;
+    --neutral-900: 0, 0%, 90%;
+
+    /* Dark Mode Surface */
+    --bg-surface: 0, 0%, 0%;
+    --text-main: 0, 0%, 100%;
+
+    /* Dark Mode Primary (Inverted) - White */
+    --primary-50: 0, 0%, 10%;
+    --primary-100: 0, 0%, 20%;
+    --primary-200: 0, 0%, 30%;
+    --primary-300: 0, 0%, 40%;
+    --primary-400: 0, 0%, 60%;
+    --primary-500: 0, 0%, 100%;
+    --primary-600: 0, 0%, 90%;
+    --primary-700: 0, 0%, 80%;
+    --primary-800: 0, 0%, 70%;
+    --primary-900: 0, 0%, 60%;
+
+    /* Dark Mode Success - Greyscale */
+    --success-50: 0, 0%, 10%;
+    --success-100: 0, 0%, 15%;
+    --success-200: 0, 0%, 20%;
+    --success-300: 0, 0%, 30%;
+    --success-400: 0, 0%, 40%;
+    --success-500: 0, 0%, 80%;
+    --success-600: 0, 0%, 70%;
+    --success-700: 0, 0%, 60%;
+    --success-800: 0, 0%, 50%;
+    --success-900: 0, 0%, 40%;
+
+    /* Dark Mode Warning - Greyscale */
+    --warning-50: 0, 0%, 10%;
+    --warning-100: 0, 0%, 15%;
+    --warning-200: 0, 0%, 20%;
+    --warning-300: 0, 0%, 30%;
+    --warning-400: 0, 0%, 40%;
+    --warning-500: 0, 0%, 70%;
+    --warning-600: 0, 0%, 60%;
+    --warning-700: 0, 0%, 50%;
+    --warning-800: 0, 0%, 40%;
+    --warning-900: 0, 0%, 30%;
+
+    /* Dark Mode Danger - Greyscale */
+    --danger-50: 0, 0%, 10%;
+    --danger-100: 0, 0%, 15%;
+    --danger-200: 0, 0%, 20%;
+    --danger-300: 0, 0%, 30%;
+    --danger-400: 0, 0%, 40%;
+    --danger-500: 0, 0%, 100%;
+    --danger-600: 0, 0%, 90%;
+    --danger-700: 0, 0%, 80%;
+    --danger-800: 0, 0%, 70%;
+    --danger-900: 0, 0%, 60%;
+
+    /* Dark Mode Accent - Greyscale */
+    --accent-50: 0, 0%, 10%;
+    --accent-100: 0, 0%, 20%;
+    --accent-200: 0, 0%, 30%;
+    --accent-300: 0, 0%, 40%;
+    --accent-400: 0, 0%, 50%;
+    --accent-500: 0, 0%, 60%;
+    --accent-600: 0, 0%, 70%;
+    --accent-700: 0, 0%, 80%;
+    --accent-800: 0, 0%, 90%;
+    --accent-900: 0, 0%, 100%;
+
+    /* Dark Mode Gold - Greyscale */
+    --gold-50: 0, 0%, 10%;
+    --gold-100: 0, 0%, 15%;
+    --gold-200: 0, 0%, 20%;
+    --gold-300: 0, 0%, 25%;
+    --gold-400: 0, 0%, 30%;
+    --gold-500: 0, 0%, 50%;
+    --gold-600: 0, 0%, 60%;
+    --gold-700: 0, 0%, 70%;
+    --gold-800: 0, 0%, 80%;
+    --gold-900: 0, 0%, 90%;
+
+    /* Glass Variables Dark */
+    --glass-bg: rgba(0, 0, 0, 0.9);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --card-shadow: rgba(0, 0, 0, 0.5);
+}
+
+/* Base Styles */
+* {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', sans-serif;
+}
+
+body {
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Glassmorphism Effect */
+.glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+}
+
+.glass-dark {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+}
+
+/* Unused - kept for compatibility but black */
+.gradient-text {
+    color: hsl(var(--primary-500));
+}
+
+/* Card Hover Effects */
+.card-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 48px 0 var(--card-shadow);
+}
+
+/* Button Styles */
+.btn-primary {
+    padding: 0.75rem 1.5rem;
+    color: hsl(var(--bg-surface));
+    /* Contrast against primary */
+    font-weight: 600;
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+    background: hsl(var(--primary-500));
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid transparent;
+}
+
+.btn-primary:hover {
+    box-shadow: 0 12px 24px rgba(59, 130, 246, 0.4);
+    transform: scale(1.05);
+}
+
+.btn-primary:active {
+    transform: scale(0.95);
+}
+
+.btn-success {
+    padding: 0.75rem 1.5rem;
+    color: hsl(var(--bg-surface));
+    font-weight: 600;
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+    background: hsl(var(--success-500));
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-success:hover {
+    box-shadow: 0 12px 24px rgba(16, 185, 129, 0.4);
+    transform: scale(1.05);
+}
+
+.btn-success:active {
+    transform: scale(0.95);
+}
+
+.btn-outline {
+    padding: 0.75rem 1.5rem;
+    border: 2px solid hsl(var(--primary-500));
+    color: hsl(var(--primary-500));
+    font-weight: 600;
+    border-radius: 0.75rem;
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+    background: hsl(var(--primary-500));
+    color: white;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+/* Input Styles */
+input[type="number"],
+input[type="text"],
+input[type="email"],
+select,
+textarea {
+    transition: all 0.3s ease;
+}
+
+input[type="number"]:focus,
+input[type="text"]:focus,
+input[type="email"]:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    ring: 2px solid hsl(220, 83%, 53%);
+    box-shadow: 0 0 0 2px hsla(220, 83%, 53%, 0.3);
+}
+
+/* Range Slider Enhancement */
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 8px;
+    border-radius: 9999px;
+    background: hsl(var(--neutral-300));
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+input[type="range"]:hover {
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    border: none;
+    transition: all 0.3s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: hsl(220, 20%, 97%);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary-500));
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary-600));
+}
+
+/* Shimmer Effect for Loading */
+.shimmer {
+    background: linear-gradient(90deg,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.8) 50%,
+            rgba(255, 255, 255, 0) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+}
+
+/* Pulse Animation for Important Elements */
+.pulse-glow {
+    animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+    }
+
+    50% {
+        box-shadow: 0 0 20px 10px rgba(59, 130, 246, 0);
+    }
+}
+
+/* Smooth entry animations */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Badge Styles - Pure CSS */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.badge-primary {
+    background-color: hsl(220, 100%, 92%);
+    color: hsl(220, 70%, 37%);
+}
+
+.badge-success {
+    background-color: hsl(142, 76%, 90%);
+    color: hsl(142, 72%, 29%);
+}
+
+.badge-warning {
+    background-color: hsl(38, 100%, 88%);
+    color: hsl(38, 84%, 34%);
+}
+
+.badge-danger {
+    background-color: hsl(0, 93%, 94%);
+    color: hsl(0, 74%, 42%);
+}
+
+/* Card with Gradient Border (Replaced with Solid) */
+.card-gradient-border {
+    position: relative;
+    background: hsl(var(--bg-surface));
+    border-radius: 1.5rem;
+    padding: 1px;
+    border: 1px solid hsl(var(--neutral-200));
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.card-gradient-border-inner {
+    background: white;
+    border-radius: 1.4rem;
+    padding: 1.5rem;
+}
+
+/* Floating Animation */
+.float {
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Shimmer Animation */
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* Custom Utilities from Tailwind Config to ensure they work */
+.bg-gradient-primary {
+    background: hsl(var(--primary-500));
+}
+
+.bg-gradient-success {
+    background: hsl(var(--success-500));
+}
+
+.bg-gradient-warning {
+    background: hsl(var(--warning-500));
+}
+
+.bg-gradient-danger {
+    background: hsl(var(--danger-500));
+}
+
+.bg-gradient-accent {
+    background: hsl(var(--accent-500));
+}
+
+.shadow-soft {
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+}
+
+.shadow-soft-lg {
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.12);
+}
+
+.shadow-glass {
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+}
+
+.shadow-glass-lg {
+    box-shadow: 0 12px 48px 0 rgba(31, 38, 135, 0.2);
+}
