@@ -263,10 +263,11 @@ function App() {
       {/* Theme Toggle Button */}
       <button
         onClick={toggleTheme}
-        className="hidden md:block fixed top-6 right-6 z-50 p-3 rounded-full bg-surface text-xl shadow-lg border border-gray-200 hover:shadow-xl hover:scale-110 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-black"
+        className="hidden md:flex items-center justify-center fixed top-6 right-6 z-50 p-3 rounded-full bg-surface text-gray-900 shadow-lg border border-gray-200 hover:shadow-xl hover:scale-110 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-black"
         title={`Switch to ${theme === 'light' ? 'Dark' : 'Light'} Mode`}
+        aria-label="Toggle theme"
       >
-        {theme === 'light' ? '🌙' : '☀️'}
+        {theme === 'light' ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
       </button>
 
       {/* Left Sidebar Navigation */}
@@ -728,10 +729,11 @@ function App() {
           <div className="flex items-center gap-2">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-full text-gray-700 hover:bg-gray-100"
+              className="p-2 rounded-full text-gray-700 hover:bg-gray-100 transition-colors"
               title="Toggle Theme"
+              aria-label="Toggle theme"
             >
-              {theme === 'light' ? '🌙' : '☀️'}
+              {theme === 'light' ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
             </button>
             <button className="text-gray-700 hover:text-gray-900">
               <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
