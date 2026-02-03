@@ -305,8 +305,8 @@ input[type="email"]:focus,
 select:focus,
 textarea:focus {
     outline: none;
-    ring: 2px solid hsl(220, 83%, 53%);
-    box-shadow: 0 0 0 2px hsla(220, 83%, 53%, 0.3);
+
+    box-shadow: 0 0 0 2px hsla(0, 0%, 0%, 0.1);
 }
 
 /* Range Slider Enhancement */
@@ -321,7 +321,7 @@ input[type="range"] {
 }
 
 input[type="range"]:hover {
-    box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
 input[type="range"]::-webkit-slider-thumb {
@@ -349,12 +349,12 @@ input[type="range"]::-moz-range-thumb {
 
 input[type="range"]::-webkit-slider-thumb:hover {
     transform: scale(1.2);
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 input[type="range"]::-moz-range-thumb:hover {
     transform: scale(1.2);
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Scrollbar Styling */
@@ -364,7 +364,7 @@ input[type="range"]::-moz-range-thumb:hover {
 }
 
 ::-webkit-scrollbar-track {
-    background: hsl(220, 20%, 97%);
+    background: hsl(0, 0%, 97%);
     border-radius: 5px;
 }
 
@@ -397,11 +397,11 @@ input[type="range"]::-moz-range-thumb:hover {
 
     0%,
     100% {
-        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.1);
     }
 
     50% {
-        box-shadow: 0 0 20px 10px rgba(59, 130, 246, 0);
+        box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0);
     }
 }
 
@@ -428,23 +428,24 @@ input[type="range"]::-moz-range-thumb:hover {
 }
 
 .badge-primary {
-    background-color: hsl(220, 100%, 92%);
-    color: hsl(220, 70%, 37%);
+    background-color: hsl(var(--primary-100));
+    color: hsl(var(--primary-700));
 }
 
 .badge-success {
-    background-color: hsl(142, 76%, 90%);
-    color: hsl(142, 72%, 29%);
+    background-color: hsl(var(--neutral-200));
+    color: hsl(var(--neutral-800));
 }
 
 .badge-warning {
-    background-color: hsl(38, 100%, 88%);
-    color: hsl(38, 84%, 34%);
+    background-color: hsl(var(--neutral-100));
+    color: hsl(var(--neutral-700));
+    border: 1px solid hsl(var(--neutral-300));
 }
 
 .badge-danger {
-    background-color: hsl(0, 93%, 94%);
-    color: hsl(0, 74%, 42%);
+    background-color: hsl(var(--primary-100));
+    color: hsl(var(--primary-800));
 }
 
 /* Card with Gradient Border (Replaced with Solid) */
@@ -521,9 +522,9 @@ input[type="range"]::-moz-range-thumb:hover {
 }
 
 .shadow-glass {
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
 }
 
 .shadow-glass-lg {
-    box-shadow: 0 12px 48px 0 rgba(31, 38, 135, 0.2);
+    box-shadow: 0 12px 48px 0 rgba(0, 0, 0, 0.15);
 }

@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Modern, vibrant color palette using HSL variables
+        // Minimal monochrome palette using HSL variables
         gray: {
           50: 'hsl(var(--neutral-50) / <alpha-value>)',
           100: 'hsl(var(--neutral-100) / <alpha-value>)',

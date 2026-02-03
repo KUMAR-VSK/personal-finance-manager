@@ -1367,7 +1367,8 @@ function GoldInvestment() {
     gold: {
       name: 'Gold',
       symbol: 'XAUUSD',
-      mcxSymbol: 'MCX:GOLD1!',
+      mcxSymbol: 'FX_IDC:XAUINRG',
+      chartUrl: 'https://in.tradingview.com/chart/vkQNiPZ4/?symbol=FX_IDC%3AXAUINRG',
       color: 'yellow',
       types: [
         {
@@ -1399,7 +1400,8 @@ function GoldInvestment() {
     silver: {
       name: 'Silver',
       symbol: 'XAGUSD',
-      mcxSymbol: 'MCX:SILVER1!',
+      mcxSymbol: 'FX_IDC:XAGINRG',
+      chartUrl: 'https://in.tradingview.com/chart/vkQNiPZ4/?symbol=FX_IDC%3AXAGINRG',
       color: 'gray',
       types: [
         {
@@ -1444,7 +1446,7 @@ function GoldInvestment() {
           new window.TradingView.widget({
             width: '100%',
             height: 400,
-            symbol: selectedMetal === 'gold' ? 'MCX:GOLD1!' : 'MCX:SILVER1!',
+            symbol: currentMetal.mcxSymbol,
             interval: 'D',
             timezone: 'Asia/Kolkata',
             theme: 'light',
@@ -1515,8 +1517,8 @@ function GoldInvestment() {
         <div className="tradingview-widget-container rounded-lg overflow-hidden">
           <div id="tradingview_chart" style={{ height: '400px' }}></div>
           <div className="tradingview-widget-copyright mt-2 text-center">
-            <a href={`https://www.tradingview.com/symbols/${currentMetal.mcxSymbol}/`} rel="noopener noreferrer" target="_blank" className="text-gray-600 hover:underline text-xs">
-              Live MCX {currentMetal.name} Chart by TradingView
+            <a href={currentMetal.chartUrl} rel="noopener noreferrer" target="_blank" className="text-gray-600 hover:underline text-xs">
+              Live {currentMetal.name} Chart by TradingView
             </a>
           </div>
         </div>
@@ -3195,15 +3197,15 @@ function NPSCalculator() {
   const estimatedMonthlyPension = (annuityAmount * (annuityRate / 100)) / 12;
 
   const chartData = [
-    { label: 'Invested Amount', value: Math.round(totalInvested), color: '#3b82f6', displayValue: `₹${Math.round(totalInvested).toLocaleString()}` },
-    { label: 'Interest Earned', value: Math.round(interestEarned), color: '#10b981', displayValue: `₹${Math.round(interestEarned).toLocaleString()}` }
+    { label: 'Invested Amount', value: Math.round(totalInvested), color: '#333333', displayValue: `₹${Math.round(totalInvested).toLocaleString()}` },
+    { label: 'Interest Earned', value: Math.round(interestEarned), color: '#999999', displayValue: `₹${Math.round(interestEarned).toLocaleString()}` }
   ];
 
   return (
     <div className="max-w-6xl mx-auto space-y-8 animate-fadeIn">
       {/* Header */}
       <div className="text-center">
-        <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 mb-2">
+        <h1 className="text-3xl font-bold text-black mb-2">
           NPS Calculator
         </h1>
         <p className="text-gray-600 max-w-2xl mx-auto">
@@ -3217,7 +3219,7 @@ function NPSCalculator() {
         {/* Left Column: Inputs */}
         <div className="bg-white p-6 rounded-2xl shadow-soft border border-gray-100 space-y-6">
           <h2 className="text-xl font-bold text-gray-800 flex items-center gap-2">
-            <Calculator className="w-5 h-5 text-blue-500" />
+            <Calculator className="w-5 h-5 text-black" />
             Investment Details
           </h2>
 
@@ -3287,17 +3289,17 @@ function NPSCalculator() {
 
           {/* Results Summary Grid */}
           <div className="grid grid-cols-2 gap-4">
-            <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-xl border border-blue-200">
-              <p className="text-xs text-blue-600 font-bold uppercase tracking-wider">Lump Sum (Tax Free)</p>
-              <p className="text-xl font-bold text-blue-900 mt-1">₹{Math.round(lumpsumAmount).toLocaleString()}</p>
+            <div className="bg-gray-50 p-4 rounded-xl border border-gray-200">
+              <p className="text-xs text-gray-600 font-bold uppercase tracking-wider">Lump Sum (Tax Free)</p>
+              <p className="text-xl font-bold text-black mt-1">₹{Math.round(lumpsumAmount).toLocaleString()}</p>
             </div>
-            <div className="bg-gradient-to-br from-indigo-50 to-indigo-100 p-4 rounded-xl border border-indigo-200">
-              <p className="text-xs text-indigo-600 font-bold uppercase tracking-wider">Annuity Amount</p>
-              <p className="text-xl font-bold text-indigo-900 mt-1">₹{Math.round(annuityAmount).toLocaleString()}</p>
+            <div className="bg-gray-100 p-4 rounded-xl border border-gray-200">
+              <p className="text-xs text-gray-600 font-bold uppercase tracking-wider">Annuity Amount</p>
+              <p className="text-xl font-bold text-black mt-1">₹{Math.round(annuityAmount).toLocaleString()}</p>
             </div>
           </div>
 
-          <div className="bg-gradient-to-r from-green-500 to-teal-600 p-6 rounded-2xl shadow-lg text-white relative overflow-hidden">
+          <div className="bg-black p-6 rounded-2xl shadow-lg text-white relative overflow-hidden">
             <div className="relative z-10">
               <p className="text-sm font-medium opacity-90 mb-1">Estimated Monthly Pension</p>
               <div className="flex items-baseline gap-1">
@@ -3306,20 +3308,19 @@ function NPSCalculator() {
               </div>
               <p className="text-xs mt-2 opacity-75">*Based on {annuityPercentage}% corpus reinvested at {annuityRate}% annuity rate</p>
             </div>
-            <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-white opacity-10 rounded-full blur-xl"></div>
           </div>
         </div>
       </div>
 
       {/* Tax Benefits Info */}
-      <div className="bg-yellow-50 border-l-4 border-yellow-400 p-5 rounded-r-lg">
+      <div className="bg-gray-50 border-l-4 border-black p-5 rounded-r-lg">
         <div className="flex items-start">
           <div className="flex-shrink-0">
-            <Shield className="h-5 w-5 text-yellow-600" />
+            <Shield className="h-5 w-5 text-black" />
           </div>
           <div className="ml-3">
-            <h3 className="text-sm font-medium text-yellow-800">Tax Saving Benefits</h3>
-            <div className="mt-2 text-sm text-yellow-700 space-y-1">
+            <h3 className="text-sm font-medium text-black">Tax Saving Benefits</h3>
+            <div className="mt-2 text-sm text-gray-700 space-y-1">
               <p>• <strong>Sec 80CCD(1):</strong> Tax deduction up to 10% of salary (Basic + DA) within ₹1.5 Lakh limit of 80C.</p>
               <p>• <strong>Sec 80CCD(1B):</strong> Additional exclusive deduction of ₹50,000 over and above 80C.</p>
               <p>• <strong>Tax Efficiency:</strong> 60% of corpus withdrawal at maturity is completely Tax-Free.</p>
@@ -3376,8 +3377,8 @@ function BudgetPlanner() {
     <div className="max-w-4xl mx-auto">
       <h1 className="text-3xl font-bold mb-6">Monthly Budget Planner</h1>
 
-      <div className="bg-purple-50 border-l-4 border-purple-400 p-4 mb-6">
-        <p className="text-sm text-purple-700">
+      <div className="bg-gray-50 border-l-4 border-black p-4 mb-6">
+        <p className="text-sm text-gray-700">
           Plan your monthly budget using the 50/30/20 rule: 50% needs, 30% wants, 20% savings.
         </p>
       </div>
@@ -3423,7 +3424,7 @@ function BudgetPlanner() {
           </div>
           <button
             onClick={calculateBudget}
-            className="w-full mt-4 bg-purple-600 text-white py-2 px-4 rounded hover:bg-purple-700"
+            className="w-full mt-4 bg-black text-white py-2 px-4 rounded hover:bg-gray-800"
           >
             Calculate Budget
           </button>
@@ -3434,25 +3435,25 @@ function BudgetPlanner() {
         <div className="mt-6 bg-surface p-6 rounded-lg shadow">
           <h2 className="text-xl font-semibold mb-4">Budget Summary</h2>
           <div className="grid md:grid-cols-3 gap-4">
-            <div className="text-center p-4 bg-green-50 rounded">
+            <div className="text-center p-4 bg-gray-50 rounded">
               <p className="text-sm text-gray-600 mb-1">Monthly Income</p>
-              <p className="text-2xl font-bold text-green-600">₹{result.income.toLocaleString()}</p>
+              <p className="text-2xl font-bold text-black">₹{result.income.toLocaleString()}</p>
             </div>
-            <div className="text-center p-4 bg-red-50 rounded">
+            <div className="text-center p-4 bg-gray-50 rounded">
               <p className="text-sm text-gray-600 mb-1">Total Expenses</p>
-              <p className="text-2xl font-bold text-red-600">₹{result.totalExpenses.toLocaleString()}</p>
+              <p className="text-2xl font-bold text-gray-800">₹{result.totalExpenses.toLocaleString()}</p>
             </div>
-            <div className="text-center p-4 bg-blue-50 rounded">
+            <div className="text-center p-4 bg-gray-50 rounded">
               <p className="text-sm text-gray-600 mb-1">Balance</p>
-              <p className={`text-2xl font-bold ${result.balance >= 0 ? 'text-blue-600' : 'text-red-600'}`}>
+              <p className={`text-2xl font-bold ${result.balance >= 0 ? 'text-black' : 'text-gray-600'}`}>
                 ₹{result.balance.toLocaleString()}
               </p>
               <p className="text-xs text-gray-500 mt-1">({result.savingsPercentage}% of income)</p>
             </div>
           </div>
           {result.balance < 0 && (
-            <div className="mt-4 bg-red-50 border-l-4 border-red-400 p-4">
-              <p className="text-sm text-red-700 font-medium">
+            <div className="mt-4 bg-gray-50 border-l-4 border-black p-4">
+              <p className="text-sm text-gray-700 font-medium">
                 ⚠️ Warning: Your expenses exceed your income. Consider reducing discretionary spending.
               </p>
             </div>
@@ -3471,12 +3472,12 @@ function ExpenseTracker() {
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
 
   const categories = [
-    { value: 'food', label: 'Food & Dining', color: 'bg-red-100 text-red-800' },
-    { value: 'transport', label: 'Transportation', color: 'bg-blue-100 text-blue-800' },
-    { value: 'shopping', label: 'Shopping', color: 'bg-purple-100 text-purple-800' },
-    { value: 'bills', label: 'Bills & Utilities', color: 'bg-yellow-100 text-yellow-800' },
-    { value: 'entertainment', label: 'Entertainment', color: 'bg-pink-100 text-pink-800' },
-    { value: 'health', label: 'Healthcare', color: 'bg-green-100 text-green-800' },
+    { value: 'food', label: 'Food & Dining', color: 'bg-gray-100 text-gray-800' },
+    { value: 'transport', label: 'Transportation', color: 'bg-gray-100 text-gray-800' },
+    { value: 'shopping', label: 'Shopping', color: 'bg-gray-100 text-gray-800' },
+    { value: 'bills', label: 'Bills & Utilities', color: 'bg-gray-100 text-gray-800' },
+    { value: 'entertainment', label: 'Entertainment', color: 'bg-gray-100 text-gray-800' },
+    { value: 'health', label: 'Healthcare', color: 'bg-gray-100 text-gray-800' },
     { value: 'other', label: 'Other', color: 'bg-gray-100 text-gray-800' }
   ];
 
@@ -3567,7 +3568,7 @@ function ExpenseTracker() {
             </div>
             <button
               onClick={addExpense}
-              className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
+              className="w-full bg-black text-white py-2 px-4 rounded hover:bg-gray-800"
             >
               Add Expense
             </button>
@@ -3578,7 +3579,7 @@ function ExpenseTracker() {
           <h2 className="text-xl font-semibold mb-4">Summary</h2>
           <div className="text-center">
             <p className="text-sm text-gray-600 mb-2">Total Expenses</p>
-            <p className="text-3xl font-bold text-red-600">₹{totalExpenses.toLocaleString()}</p>
+            <p className="text-3xl font-bold text-black">₹{totalExpenses.toLocaleString()}</p>
             <p className="text-sm text-gray-500 mt-4">{expenses.length} transaction{expenses.length !== 1 ? 's' : ''}</p>
           </div>
         </div>
@@ -3605,7 +3606,7 @@ function ExpenseTracker() {
                   <span className="text-lg font-semibold">₹{expense.amount.toLocaleString()}</span>
                   <button
                     onClick={() => deleteExpense(expense.id)}
-                    className="text-red-600 hover:text-red-800"
+                    className="text-gray-600 hover:text-black"
                     title="Delete"
                   >
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -3668,8 +3669,8 @@ function SavingsGoalTracker() {
     <div className="max-w-4xl mx-auto">
       <h1 className="text-3xl font-bold mb-6">Savings Goal Tracker</h1>
 
-      <div className="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
-        <p className="text-sm text-blue-700">
+      <div className="bg-gray-50 border-l-4 border-black p-4 mb-6">
+        <p className="text-sm text-gray-700">
           Set financial goals and track your progress. Calculate monthly savings needed to reach your targets.
         </p>
       </div>
@@ -3698,7 +3699,7 @@ function SavingsGoalTracker() {
               className="w-full p-2 border rounded" />
           </div>
         </div>
-        <button onClick={addGoal} className="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">
+        <button onClick={addGoal} className="mt-4 w-full bg-black text-white py-2 px-4 rounded hover:bg-gray-800">
           Add Goal
         </button>
       </div>
@@ -3713,7 +3714,7 @@ function SavingsGoalTracker() {
                   <h3 className="text-lg font-semibold">{goal.name}</h3>
                   <p className="text-sm text-gray-500">Target: {new Date(goal.targetDate).toLocaleDateString()}</p>
                 </div>
-                <button onClick={() => deleteGoal(goal.id)} className="text-red-600 hover:text-red-800 p-1 hover:bg-red-50 rounded-full transition-colors" title="Delete Goal">
+                <button onClick={() => deleteGoal(goal.id)} className="text-gray-600 hover:text-black p-1 hover:bg-gray-100 rounded-full transition-colors" title="Delete Goal">
                   <Trash2 className="w-5 h-5" />
                 </button>
               </div>
@@ -3724,11 +3725,11 @@ function SavingsGoalTracker() {
                 </div>
                 <div>
                   <p className="text-xs text-gray-600">Current Savings</p>
-                  <p className="text-lg font-semibold text-blue-600">₹{goal.currentSavings.toLocaleString()}</p>
+                  <p className="text-lg font-semibold text-gray-800">₹{goal.currentSavings.toLocaleString()}</p>
                 </div>
                 <div>
                   <p className="text-xs text-gray-600">Remaining</p>
-                  <p className="text-lg font-semibold text-orange-600">₹{(goal.targetAmount - goal.currentSavings).toLocaleString()}</p>
+                  <p className="text-lg font-semibold text-black">₹{(goal.targetAmount - goal.currentSavings).toLocaleString()}</p>
                 </div>
               </div>
               <div className="mb-4">
@@ -3737,12 +3738,12 @@ function SavingsGoalTracker() {
                   <span className="font-semibold">{goal.progress.toFixed(1)}%</span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-3">
-                  <div className="bg-blue-600 h-3 rounded-full" style={{ width: `${Math.min(goal.progress, 100)}%` }}></div>
+                  <div className="bg-black h-3 rounded-full" style={{ width: `${Math.min(goal.progress, 100)}%` }}></div>
                 </div>
               </div>
               {goal.monthsRemaining > 0 && (
-                <div className="bg-green-50 p-3 rounded">
-                  <p className="text-sm font-medium text-green-800">
+                <div className="bg-gray-50 p-3 rounded">
+                  <p className="text-sm font-medium text-gray-700">
                     Save ₹{goal.monthlySavingsNeeded.toFixed(0).toLocaleString()}/month for {goal.monthsRemaining} months to reach your goal
                   </p>
                 </div>
@@ -3784,9 +3785,9 @@ function TaxSavingGuide() {
     <div className="max-w-4xl mx-auto">
       <h1 className="text-3xl font-bold mb-6">Tax Saving Guide</h1>
 
-      <div className="bg-green-50 border-l-4 border-green-400 p-6 mb-8 rounded-r-lg">
-        <h3 className="text-lg font-bold text-green-900 mb-2">Full Guide Coming Soon!</h3>
-        <p className="text-green-800">
+      <div className="bg-gray-50 border-l-4 border-black p-6 mb-8 rounded-r-lg">
+        <h3 className="text-lg font-bold text-black mb-2">Full Guide Coming Soon!</h3>
+        <p className="text-gray-700">
           We are compiling a detailed guide for FY 2024-25. Here is a quick checklist of popular Section 80C options.
         </p>
       </div>
@@ -3886,8 +3887,8 @@ function GSTCalculator() {
     <div className="max-w-2xl mx-auto">
       <h1 className="text-3xl font-bold mb-6">GST Calculator</h1>
 
-      <div className="bg-indigo-50 border-l-4 border-indigo-400 p-4 mb-6">
-        <p className="text-sm text-indigo-700">
+      <div className="bg-gray-50 border-l-4 border-black p-4 mb-6">
+        <p className="text-sm text-gray-700">
           Calculate Goods and Services Tax (GST) for India. Choose between exclusive (add GST) or inclusive (GST already included) modes.
         </p>
       </div>
@@ -3934,7 +3935,7 @@ function GSTCalculator() {
 
           <button
             onClick={calculateGST}
-            className="w-full bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700"
+            className="w-full bg-black text-white py-2 px-4 rounded hover:bg-gray-800"
           >
             Calculate GST
           </button>
@@ -3951,19 +3952,19 @@ function GSTCalculator() {
             </div>
             <div className="flex justify-between items-center pb-2 border-b">
               <span className="text-gray-600">CGST ({gstRate / 2}%)</span>
-              <span className="text-lg font-semibold text-blue-600">₹{parseFloat(result.cgst).toLocaleString()}</span>
+              <span className="text-lg font-semibold text-gray-800">₹{parseFloat(result.cgst).toLocaleString()}</span>
             </div>
             <div className="flex justify-between items-center pb-2 border-b">
               <span className="text-gray-600">SGST ({gstRate / 2}%)</span>
-              <span className="text-lg font-semibold text-blue-600">₹{parseFloat(result.sgst).toLocaleString()}</span>
+              <span className="text-lg font-semibold text-gray-800">₹{parseFloat(result.sgst).toLocaleString()}</span>
             </div>
             <div className="flex justify-between items-center pb-2 border-b">
               <span className="text-gray-600 font-medium">Total GST</span>
-              <span className="text-lg font-semibold text-indigo-600">₹{parseFloat(result.totalGST).toLocaleString()}</span>
+              <span className="text-lg font-semibold text-black">₹{parseFloat(result.totalGST).toLocaleString()}</span>
             </div>
             <div className="flex justify-between items-center pt-2">
               <span className="text-gray-800 font-medium">Total Amount</span>
-              <span className="text-2xl font-bold text-gray-900">₹{parseFloat(result.totalAmount).toLocaleString()}</span>
+              <span className="text-2xl font-bold text-black">₹{parseFloat(result.totalAmount).toLocaleString()}</span>
             </div>
           </div>
         </div>
@@ -4011,25 +4012,25 @@ function TDSCalculator() {
 
   return (
     <div className="max-w-2xl mx-auto animate-slide-up">
-      <h1 className="text-3xl font-bold mb-6 text-slate-800 dark:text-slate-100">TDS Calculator</h1>
+      <h1 className="text-3xl font-bold mb-6 text-black">TDS Calculator</h1>
 
-      <div className="bg-indigo-50 dark:bg-indigo-900/20 border-l-4 border-indigo-400 p-4 mb-6 rounded-r-lg">
-        <p className="text-sm text-indigo-700 dark:text-indigo-300">
+      <div className="bg-gray-50 border-l-4 border-black p-4 mb-6 rounded-r-lg">
+        <p className="text-sm text-gray-700">
           Calculate Tax Deducted at Source (TDS) on various income types as per IT Act.
         </p>
       </div>
 
-      <div className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg mb-6 border border-slate-100 dark:border-slate-700">
+      <div className="bg-white p-6 rounded-xl shadow-lg mb-6 border border-gray-100">
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-300">Income Type</label>
+            <label className="block text-sm font-medium mb-2 text-gray-700">Income Type</label>
             <select value={incomeType}
               onChange={(e) => {
                 setIncomeType(e.target.value);
                 const selected = incomeTypes.find(t => t.value === e.target.value);
                 setTdsRate(selected.rate);
               }}
-              className="w-full p-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-200">
+              className="w-full p-2 border border-gray-300 rounded-lg bg-white text-gray-800">
               {incomeTypes.map(type => (
                 <option key={type.value} value={type.value}>{type.label} ({type.rate}%)</option>
               ))}
@@ -4037,39 +4038,39 @@ function TDSCalculator() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-300">Gross Amount (₹)</label>
+            <label className="block text-sm font-medium mb-2 text-gray-700">Gross Amount (₹)</label>
             <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)}
-              className="w-full p-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-200" placeholder="Enter gross amount" />
+              className="w-full p-2 border border-gray-300 rounded-lg bg-white text-gray-800" placeholder="Enter gross amount" />
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-300">TDS Rate (%)</label>
+            <label className="block text-sm font-medium mb-2 text-gray-700">TDS Rate (%)</label>
             <input type="number" step="0.1" value={tdsRate} onChange={(e) => setTdsRate(e.target.value)}
-              className="w-full p-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-200" />
+              className="w-full p-2 border border-gray-300 rounded-lg bg-white text-gray-800" />
           </div>
 
           <button onClick={calculateTDS}
-            className="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition-colors shadow-lg shadow-indigo-500/30">
+            className="w-full bg-black text-white py-2 px-4 rounded-lg hover:bg-gray-800 transition-colors shadow-lg">
             Calculate TDS
           </button>
         </div>
       </div>
 
       {result && (
-        <div className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg border border-slate-100 dark:border-slate-700 animate-fade-in">
-          <h2 className="text-xl font-semibold mb-4 text-slate-800 dark:text-slate-200">TDS Calculation</h2>
+        <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 animate-fade-in">
+          <h2 className="text-xl font-semibold mb-4 text-black">TDS Calculation</h2>
           <div className="space-y-3">
-            <div className="flex justify-between items-center pb-2 border-b border-slate-100 dark:border-slate-700">
-              <span className="text-slate-600 dark:text-slate-400">Gross Amount</span>
-              <span className="text-lg font-semibold text-slate-800 dark:text-slate-200">₹{parseFloat(result.grossAmount).toLocaleString()}</span>
+            <div className="flex justify-between items-center pb-2 border-b border-gray-100">
+              <span className="text-gray-600">Gross Amount</span>
+              <span className="text-lg font-semibold text-black">₹{parseFloat(result.grossAmount).toLocaleString()}</span>
             </div>
-            <div className="flex justify-between items-center pb-2 border-b border-slate-100 dark:border-slate-700">
-              <span className="text-slate-600 dark:text-slate-400">TDS @ {result.tdsRate}%</span>
-              <span className="text-lg font-semibold text-red-600 dark:text-red-400">₹{parseFloat(result.tdsAmount).toLocaleString()}</span>
+            <div className="flex justify-between items-center pb-2 border-b border-gray-100">
+              <span className="text-gray-600">TDS @ {result.tdsRate}%</span>
+              <span className="text-lg font-semibold text-black">₹{parseFloat(result.tdsAmount).toLocaleString()}</span>
             </div>
             <div className="flex justify-between items-center pt-2">
-              <span className="text-slate-800 dark:text-slate-200 font-medium">Net Amount Receivable</span>
-              <span className="text-2xl font-bold text-green-600 dark:text-green-500">₹{parseFloat(result.netAmount).toLocaleString()}</span>
+              <span className="text-black font-medium">Net Amount Receivable</span>
+              <span className="text-2xl font-bold text-black">₹{parseFloat(result.netAmount).toLocaleString()}</span>
             </div>
           </div>
         </div>
@@ -4086,51 +4087,51 @@ function FinancialLiteracy() {
       {
         title: 'The 50/30/20 Rule',
         content: 'A timeless budgeting framework: Allocate 50% of income for Needs (Rent, Food, Bills), 30% for Wants (Dining, Entertainment), and 20% strictly for Savings & Debt Repayment.',
-        icon: <Wallet className="w-6 h-6 text-purple-600" />
+        icon: <Wallet className="w-6 h-6 text-black" />
       },
       {
         title: 'Emergency Fund',
         content: 'Your financial oxygen mask. Aim to save 3-6 months of essential living expenses in a liquid fund (Savings/FD) to handle job loss or medical emergencies without debt.',
-        icon: <Shield className="w-6 h-6 text-green-600" />
+        icon: <Shield className="w-6 h-6 text-black" />
       },
       {
         title: 'Inflation',
         content: 'The silent wealth killer. It reduces the purchasing power of money over time. Your investments must grow faster than inflation (~6%) to grow real wealth.',
-        icon: <TrendingUp className="w-6 h-6 text-red-600" />
+        icon: <TrendingUp className="w-6 h-6 text-black" />
       }
     ],
     investing: [
       {
         title: 'Power of Compounding',
         content: 'Earning interest on interest. The key is "Time in the Market", not "Timing the Market". Starting 5 years early can potentially double your retirement corpus.',
-        icon: <BarChart3 className="w-6 h-6 text-blue-600" />
+        icon: <BarChart3 className="w-6 h-6 text-black" />
       },
       {
         title: 'Diversification',
         content: "Don't put all eggs in one basket. Spread risk across Asset Classes: Equity (Growth), Debt (Stability), and Gold (Hedge).",
-        icon: <PieChart className="w-6 h-6 text-orange-600" />
+        icon: <PieChart className="w-6 h-6 text-black" />
       },
       {
         title: 'SIP (Rupee Cost Averaging)',
         content: 'Invest fixed amounts regularly. You buy more units when markets are down and fewer when up, averaging your cost and reducing volatility risk.',
-        icon: <Clock className="w-6 h-6 text-indigo-600" />
+        icon: <Clock className="w-6 h-6 text-black" />
       }
     ],
     taxation: [
       {
         title: 'Section 80C',
         content: 'The most popular tax-saving tool. Claim up to ₹1.5 Lakh deduction by investing in PPF, ELSS Mutual Funds, EPF, or paying Life Insurance premiums.',
-        icon: <FileText className="w-6 h-6 text-green-600" />
+        icon: <FileText className="w-6 h-6 text-black" />
       },
       {
         title: 'Tax Regime Selection',
         content: 'Old Regime allows various deductions (HRA, 80C, 80D) but has higher slab rates. New Regime has lower rates but zero deductions. Compare before filing.',
-        icon: <Scale className="w-6 h-6 text-gray-600" />
+        icon: <Scale className="w-6 h-6 text-black" />
       },
       {
         title: 'Health Insurance (Section 80D)',
         content: 'Double benefit: Protects your savings from medical bills AND saves tax. You can claim up to ₹25,000 for self/family and additional for parents.',
-        icon: <Shield className="w-6 h-6 text-teal-600" />
+        icon: <Shield className="w-6 h-6 text-black" />
       }
     ]
   };
@@ -4146,7 +4147,7 @@ function FinancialLiteracy() {
   return (
     <div className="max-w-6xl mx-auto animate-slide-up">
       <div className="text-center mb-10">
-        <h1 className="text-3xl font-bold mb-4 bg-gradient-to-r from-teal-500 to-cyan-600 bg-clip-text text-transparent">
+        <h1 className="text-3xl font-bold mb-4 text-black">
           Financial Knowledge Hub
         </h1>
         <p className="text-gray-600 max-w-2xl mx-auto text-lg">
@@ -4160,7 +4161,7 @@ function FinancialLiteracy() {
             key={tab}
             onClick={() => setActiveTab(tab)}
             className={`px-6 py-2.5 rounded-full font-bold capitalize transition-all duration-300 transform hover:scale-105 ${activeTab === tab
-              ? 'bg-gradient-to-r from-teal-500 to-cyan-500 text-white shadow-lg ring-2 ring-cyan-200'
+              ? 'bg-black text-white shadow-lg'
               : 'bg-white text-gray-600 hover:bg-gray-50 shadow-sm border border-gray-200'
               }`}
           >
@@ -4173,7 +4174,7 @@ function FinancialLiteracy() {
         {activeTab === 'glossary' ? (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {glossary.map((item, index) => (
-              <div key={index} className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow border-t-4 border-teal-400">
+              <div key={index} className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow border-t-4 border-black">
                 <h3 className="font-bold text-gray-800 mb-2">{item.term}</h3>
                 <p className="text-sm text-gray-600 leading-relaxed">{item.definition}</p>
               </div>
@@ -4183,7 +4184,7 @@ function FinancialLiteracy() {
           <div className="grid md:grid-cols-3 gap-6">
             {content[activeTab].map((item, index) => (
               <div key={index} className="bg-white p-6 rounded-2xl shadow-soft hover:shadow-lg transition-all duration-300 group border border-gray-100">
-                <div className="w-12 h-12 bg-gray-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-cyan-50 transition-colors">
+                <div className="w-12 h-12 bg-gray-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-gray-100 transition-colors">
                   {item.icon}
                 </div>
                 <h3 className="text-xl font-bold text-gray-800 mb-3">{item.title}</h3>
@@ -4194,13 +4195,13 @@ function FinancialLiteracy() {
         )}
       </div>
 
-      <div className="mt-12 bg-gradient-to-br from-indigo-50 to-blue-50 p-8 rounded-2xl border border-indigo-100 flex items-start gap-4">
+      <div className="mt-12 bg-gray-50 p-8 rounded-2xl border border-gray-200 flex items-start gap-4">
         <div className="bg-white p-3 rounded-full shadow-sm hidden sm:block">
-          <GraduationCap className="w-8 h-8 text-indigo-600" />
+          <GraduationCap className="w-8 h-8 text-black" />
         </div>
         <div>
-          <h2 className="text-xl font-bold text-indigo-900 mb-2">Continuous Learning</h2>
-          <p className="text-indigo-800/80 leading-relaxed">
+          <h2 className="text-xl font-bold text-black mb-2">Continuous Learning</h2>
+          <p className="text-gray-700 leading-relaxed">
             Financial literacy is not a destination, but a journey. The concepts here are just the beginning.
             Use the tools in this app to apply these principles—track your budget, plan your SIPs, and optimize your taxes.
           </p>
@@ -4222,15 +4223,15 @@ function InvestmentStrategy() {
 
         <div className="grid md:grid-cols-3 gap-6">
           <div className="p-4 border border-gray-200 rounded-xl">
-            <h3 className="font-bold text-lg mb-2 text-green-700">Conservative</h3>
+            <h3 className="font-bold text-lg mb-2 text-black">Conservative</h3>
             <p className="text-sm text-gray-600">Focus on capital preservation. High allocation to FD, Debt Funds.</p>
           </div>
           <div className="p-4 border border-gray-200 rounded-xl">
-            <h3 className="font-bold text-lg mb-2 text-blue-700">Balanced</h3>
+            <h3 className="font-bold text-lg mb-2 text-black">Balanced</h3>
             <p className="text-sm text-gray-600">Mix of growth and safety. Equity and Debt in 50:50 or 60:40 ratio.</p>
           </div>
           <div className="p-4 border border-gray-200 rounded-xl">
-            <h3 className="font-bold text-lg mb-2 text-orange-700">Aggressive</h3>
+            <h3 className="font-bold text-lg mb-2 text-black">Aggressive</h3>
             <p className="text-sm text-gray-600">Focus on high growth. High allocation to Small/Mid-cap Stocks.</p>
           </div>
         </div>
@@ -4244,8 +4245,8 @@ function RiskAssessment() {
     <div className="max-w-2xl mx-auto">
       <h1 className="text-3xl font-bold mb-6">Risk Assessment Quiz</h1>
       <div className="bg-surface p-8 rounded-2xl shadow-lg text-center">
-        <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <Scale className="w-8 h-8 text-yellow-600" />
+        <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <Scale className="w-8 h-8 text-black" />
         </div>
         <h2 className="text-2xl font-bold text-gray-800 mb-2">Know Your Risk Profile</h2>
         <p className="text-gray-600 mb-6">
@@ -4279,25 +4280,25 @@ function FinanceTips() {
 
   return (
     <div className="max-w-4xl mx-auto animate-fadeIn">
-      <h1 className="text-3xl font-bold mb-6 bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">
+      <h1 className="text-3xl font-bold mb-6 text-black">
         Personal Finance Smart Tips
       </h1>
 
       {/* Featured Tip Card */}
-      <div className="bg-gradient-to-br from-yellow-50 to-orange-50 p-8 rounded-3xl shadow-lg border border-yellow-100 relative overflow-hidden mb-8">
+      <div className="bg-gray-50 p-8 rounded-3xl shadow-lg border border-gray-200 relative overflow-hidden mb-8">
         <div className="absolute top-0 right-0 p-8 opacity-10">
-          <Lightbulb className="w-32 h-32 text-yellow-600" />
+          <Lightbulb className="w-32 h-32 text-black" />
         </div>
 
         <div className="relative z-10">
-          <h2 className="text-sm font-bold text-yellow-600 uppercase tracking-widest mb-2">Tip of the Moment</h2>
-          <p className="text-2xl font-bold text-gray-800 leading-snug mb-6 min-h-[80px]">
+          <h2 className="text-sm font-bold text-gray-600 uppercase tracking-widest mb-2">Tip of the Moment</h2>
+          <p className="text-2xl font-bold text-black leading-snug mb-6 min-h-[80px]">
             "{tips[currentTipIndex]}"
           </p>
 
           <button
             onClick={nextTip}
-            className="bg-white text-yellow-700 font-semibold py-2 px-6 rounded-full shadow-sm hover:shadow-md transition-all flex items-center gap-2"
+            className="bg-black text-white font-semibold py-2 px-6 rounded-full shadow-sm hover:shadow-md transition-all flex items-center gap-2 hover:bg-gray-800"
           >
             Next Tip <ChevronDown className="w-4 h-4 rotate-[-90deg]" />
           </button>
@@ -4307,7 +4308,7 @@ function FinanceTips() {
       <div className="grid md:grid-cols-2 gap-6">
         <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
           <h3 className="font-bold text-gray-800 mb-3 flex items-center gap-2">
-            <CheckCircle className="w-5 h-5 text-green-500" /> Do's
+            <CheckCircle className="w-5 h-5 text-black" /> Do's
           </h3>
           <ul className="space-y-2 text-sm text-gray-600">
             <li>• Track every rupee you spend</li>
@@ -4318,7 +4319,7 @@ function FinanceTips() {
         </div>
         <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
           <h3 className="font-bold text-gray-800 mb-3 flex items-center gap-2">
-            <X className="w-5 h-5 text-red-500" /> Don'ts
+            <X className="w-5 h-5 text-black" /> Don'ts
           </h3>
           <ul className="space-y-2 text-sm text-gray-600">
             <li>• Don't invest in things you don't understand</li>
