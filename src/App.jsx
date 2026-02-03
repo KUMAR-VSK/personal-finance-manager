@@ -1812,127 +1812,128 @@ function GoldCalendar() {
 // Placeholder Components for all new features
 
 function SIPCalculator() {
-  const [monthlyInvestment, setMonthlyInvestment] = useState('5000');
-  const [expectedReturn, setExpectedReturn] = useState('12');
-  const [timePeriod, setTimePeriod] = useState('10');
+  const [monthlyInvestment, setMonthlyInvestment] = useState(5000);
+  const [expectedReturn, setExpectedReturn] = useState(12);
+  const [timePeriod, setTimePeriod] = useState(10);
   const [result, setResult] = useState(null);
 
 
-  const calculateSIP = () => {
+  useEffect(() => {
+    // Auto-calculate on mount and changes
     const P = parseFloat(monthlyInvestment);
     const r = parseFloat(expectedReturn) / 100 / 12;
     const n = parseFloat(timePeriod) * 12;
 
-    if (isNaN(P) || P <= 0 || isNaN(n) || n <= 0) {
-      return;
+    if (!isNaN(P) && P > 0 && !isNaN(n) && n > 0) {
+      const maturityValue = P * (((Math.pow(1 + r, n) - 1) / r) * (1 + r));
+      const investedAmount = P * n;
+      const estimatedReturns = maturityValue - investedAmount;
+
+      setResult({
+        investedAmount: investedAmount,
+        estimatedReturns: estimatedReturns,
+        totalValue: maturityValue
+      });
     }
+  }, [monthlyInvestment, expectedReturn, timePeriod]);
 
-    const maturityValue = P * (((Math.pow(1 + r, n) - 1) / r) * (1 + r));
-    const investedAmount = P * n;
-    const estimatedReturns = maturityValue - investedAmount;
 
-    setResult({
-      investedAmount: investedAmount.toFixed(0),
-      estimatedReturns: estimatedReturns.toFixed(0),
-      totalValue: maturityValue.toFixed(0)
-    });
-  };
-
+  const chartData = result ? [
+    { label: 'Invested Amount', value: Math.round(result.investedAmount), color: '#333333', displayValue: `₹${Math.round(result.investedAmount).toLocaleString()}` },
+    { label: 'Est. Returns', value: Math.round(result.estimatedReturns), color: '#999999', displayValue: `₹${Math.round(result.estimatedReturns).toLocaleString()}` }
+  ] : [];
 
   return (
-    <div className="max-w-5xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6">SIP Calculator</h1>
-
-      <div className="bg-gray-50 border-l-4 border-black p-4 mb-6">
-        <p className="text-sm text-gray-700">
-          Systematic Investment Plan (SIP) allows you to invest a fixed amount regularly in mutual funds.
-          Use interactive sliders to see how your investments can grow!
+    <div className="max-w-6xl mx-auto space-y-8 animate-fadeIn">
+      {/* Header */}
+      <div className="text-center">
+        <h1 className="text-3xl font-bold text-black mb-2">SIP Calculator</h1>
+        <p className="text-gray-600 max-w-2xl mx-auto">
+          Systematic Investment Plan (SIP) is a disciplined way of investing. Calculate how your small monthly investments grow over time.
         </p>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-6">
-        <div className="bg-surface p-6 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-6">Investment Details</h2>
-          <div className="space-y-6">
-            <SliderInput
-              label="Monthly Investment"
-              value={monthlyInvestment}
-              onChange={(val) => setMonthlyInvestment(val)}
-              min={500}
-              max={100000}
-              step={500}
-              unit="₹"
-            />
+      {/* Main Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
-            <SliderInput
-              label="Expected Annual Return"
-              value={expectedReturn}
-              onChange={(val) => setExpectedReturn(val)}
-              min={1}
-              max={30}
-              step={0.5}
-              unit="%"
-              helpText="Average equity mutual fund returns: 10-15%"
-            />
+        {/* Left Column: Inputs */}
+        <div className="bg-white p-6 rounded-2xl shadow-soft border border-gray-100 space-y-6">
+          <h2 className="text-xl font-bold text-gray-800 flex items-center gap-2">
+            <Calculator className="w-5 h-5 text-black" />
+            Investment Details
+          </h2>
 
-            <SliderInput
-              label="Time Period"
-              value={timePeriod}
-              onChange={(val) => setTimePeriod(val)}
-              min={1}
-              max={40}
-              step={1}
-              unit=" years"
-            />
-          </div>
+          <SliderInput
+            label="Monthly Investment"
+            value={monthlyInvestment}
+            onChange={setMonthlyInvestment}
+            min={500}
+            max={100000}
+            step={500}
+            unit="₹"
+          />
+
+          <SliderInput
+            label="Expected Annual Return"
+            value={expectedReturn}
+            onChange={setExpectedReturn}
+            min={1}
+            max={30}
+            step={0.5}
+            unit="%"
+            helpText="Historical Equity Mutual Fund returns: 12-15%"
+          />
+
+          <SliderInput
+            label="Time Period"
+            value={timePeriod}
+            onChange={setTimePeriod}
+            min={1}
+            max={40}
+            step={1}
+            unit=" Yr"
+          />
         </div>
 
-        <div className="bg-surface p-6 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-6">Investment Summary</h2>
-
-          {result && parseFloat(result.totalValue) > 0 ? (
-            <>
+        {/* Right Column: Results */}
+        <div className="space-y-6">
+          {/* Chart */}
+          <div className="bg-white p-6 rounded-2xl shadow-soft border border-gray-100 flex flex-col items-center justify-center">
+            <h3 className="text-lg font-semibold text-gray-700 mb-4">Wealth Projection</h3>
+            {result && (
               <DonutChart
-                data={[
-                  {
-                    label: 'Invested Amount',
-                    value: parseFloat(result.investedAmount),
-                    color: '#666666',
-                    displayValue: `₹${parseFloat(result.investedAmount).toLocaleString()}`
-                  },
-                  {
-                    label: 'Estimated Returns',
-                    value: parseFloat(result.estimatedReturns),
-                    color: '#000000',
-                    displayValue: `₹${parseFloat(result.estimatedReturns).toLocaleString()}`
-                  }
-                ]}
+                data={chartData}
                 centerText={{
                   label: 'Total Value',
-                  value: `₹${(parseFloat(result.totalValue) / 100000).toFixed(1)}L`
+                  value: `₹${(result.totalValue / 100000).toFixed(2)}L`
                 }}
               />
+            )}
+          </div>
 
-              <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                <div className="text-center">
-                  <p className="text-sm text-gray-600 mb-1">Maturity Amount</p>
-                  <p className="text-3xl font-bold text-black">₹{parseFloat(result.totalValue).toLocaleString()}</p>
-                  <p className="text-xs text-gray-500 mt-2">
-                    Your ₹{parseFloat(monthlyInvestment).toLocaleString()}/month can grow to this in {timePeriod} years
-                  </p>
-                </div>
-              </div>
-            </>
-          ) : (
-            <div className="flex items-center justify-center h-64 text-gray-400">
-              <div className="text-center">
-                <svg className="w-16 h-16 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                </svg>
-                <p>Adjust sliders to see results</p>
-              </div>
+          {/* Cards */}
+          <div className="grid grid-cols-2 gap-4">
+            <div className="bg-gray-50 p-4 rounded-xl border border-gray-200">
+              <p className="text-xs text-gray-600 font-bold uppercase tracking-wider">Invested Amount</p>
+              <p className="text-xl font-bold text-black mt-1">₹{result?.investedAmount?.toLocaleString()}</p>
             </div>
-          )}
+            <div className="bg-gray-100 p-4 rounded-xl border border-gray-200">
+              <p className="text-xs text-gray-600 font-bold uppercase tracking-wider">Estimated Returns</p>
+              <p className="text-xl font-bold text-black mt-1">₹{result?.estimatedReturns?.toLocaleString()}</p>
+            </div>
+          </div>
+
+          <div className="bg-black p-6 rounded-2xl shadow-lg text-white relative overflow-hidden">
+            <div className="relative z-10">
+              <p className="text-sm font-medium opacity-90 mb-1">Maturity Amount</p>
+              <div className="flex items-baseline gap-1">
+                <span className="text-4xl font-bold">₹{result?.totalValue ? Math.round(result.totalValue).toLocaleString() : '0'}</span>
+              </div>
+              <p className="text-xs mt-2 opacity-75">
+                Total corpus created in {timePeriod} years
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
