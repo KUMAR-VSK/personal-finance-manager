@@ -1,15 +1,107 @@
 import React, { useState } from 'react';
-import { Landmark, FileText, Calculator, PieChart, Wallet } from 'lucide-react';
+import { Landmark, FileText, Calculator, PieChart, Wallet, BookOpen, GraduationCap, Building, Briefcase, User, Users } from 'lucide-react';
 import { DeductionCalculator } from './DeductionCalculator';
 import { TaxFilingChecklist } from './TaxFilingChecklist';
 import { TaxCalculator } from './TaxCalculator';
 import { TaxSavingGuide } from './TaxSavingGuide';
 
 export function Taxation() {
-    const [activeTab, setActiveTab] = useState('slabs');
+    const [activeTab, setActiveTab] = useState('tutorials');
+
+    const tutorials = [
+        {
+            title: "Salaried Employee Deductions",
+            description: "Taxable salary includes allowances, perquisites, and retirement benefits. Deductions like Standard Deduction, HRA, and others are allowed.",
+            icon: <Briefcase className="w-6 h-6 text-blue-500" />,
+            fullText: "‘Salary’ is the first head of income. The income taxable under this head shall be calculated on the due basis or the receipt basis, whichever occurs earlier. Taxable salary shall include taxable allowances, perquisites, retirement benefits, and profit in lieu of salary. Certain deductions are also allowed from salary income."
+        },
+        {
+            title: "Computation of Tax (Individual)",
+            description: "Tax liability is computed based on residential status and total income under five heads, applying relevant tax slabs.",
+            icon: <User className="w-6 h-6 text-green-500" />,
+            fullText: "The income taxable in the hands of an individual and tax liability thereon shall be computed according to his residential status. The income taxable under the Income-tax Act is computed under the five heads of income, and tax thereon is computed as per the tax slab rates applicable for that previous year."
+        },
+        {
+            title: "Retirement Benefits Taxability",
+            description: "Understand the tax implications of gratuity, pension, leave encashment, and other retirement benefits.",
+            icon: <GraduationCap className="w-6 h-6 text-purple-500" />,
+            fullText: "Retirement benefits play a crucial role in providing financial security to employees in their post-retirement years. In India, employers provide various retirement benefits to employees. The taxability of these retirement benefits under the Income-tax Act depends on the type of employee (Govt vs Non-Govt)."
+        },
+        {
+            title: "Special Tax Regimes",
+            description: "Individuals, HUFs, and Companies can opt for lower tax rates (New Regime) by foregoing certain exemptions and deductions.",
+            icon: <Landmark className="w-6 h-6 text-orange-500" />,
+            fullText: "Certain assessees are allowed to opt for a lower tax rate regime subject to the fulfilment of certain conditions. These alternate tax regimes offer a lower tax rate, but certain deductions and exemptions have to be given up by the assessee (e.g., Section 115BAC for individuals)."
+        },
+        {
+            title: "TDS on Business (194R)",
+            description: "10% TDS applies on benefits or perquisites arising from business or profession provided to a resident.",
+            icon: <FileText className="w-6 h-6 text-red-500" />,
+            fullText: "Section 194R provides that person responsible for providing to a resident, any benefit or perquisite, arising from business or exercise of a profession by such resident, shall ensure that, before providing such benefit or perquisite, tax is deducted from the value of such benefit or perquisite at 10%."
+        },
+        {
+            title: "TDS on VDAs (194S)",
+            description: "1% TDS is applicable on consideration paid for transfer of Virtual Digital Assets (Crypto/NFTs).",
+            icon: <Wallet className="w-6 h-6 text-yellow-500" />,
+            fullText: "Section 194S provides that any person who is responsible for paying to any resident any sum by way of consideration for the transfer of a virtual digital asset shall deduct tax from such sum. The tax shall be deducted at the rate of 1% of such sum."
+        },
+        {
+            title: "HUF Tax Treatment",
+            description: "HUF income is taxed separately. It can also opt for the New Tax Regime under Section 115BAC.",
+            icon: <Users className="w-6 h-6 text-teal-500" />,
+            fullText: "The income taxable in the hands of a HUF (Hindu Undivided Family) is computed under four heads of income. The normal income of HUF is taxable as per slab rates provided under the Finance Act or under the new tax regime under Section 115BAC."
+        },
+        {
+            title: "Charitable Trust Income",
+            description: "Income of charitable/religious trusts is exempt under Sections 11-13 subject to applied/accumulated conditions.",
+            icon: <Building className="w-6 h-6 text-indigo-500" />,
+            fullText: "A charitable and religious trust is taxable in accordance with the provisions of Section 11 to Section 13. Section 11 provides for exemption in respect of income derived from property held under trust for charitable or religious purposes to the extent such income is applied for such purposes."
+        },
+        {
+            title: "Compulsory Land Acquisition",
+            description: "Capital gains on government acquisition of land are taxable in the year initial compensation is received.",
+            icon: <Landmark className="w-6 h-6 text-gray-500" />,
+            fullText: "Where a capital asset is acquired by the Government under any law or where consideration for transfer of capital asset is determined or approved by the Government or RBI, the capital gains shall be chargeable to tax in the previous year in which initial compensation is received."
+        },
+    ];
 
     const renderContent = () => {
         switch (activeTab) {
+            case 'tutorials':
+                return (
+                    <div className="animate-fadeIn">
+                        <div className="mb-8">
+                            <h1 className="text-3xl font-bold mb-3 text-black dark:text-white">
+                                Indian Taxation Tutorials
+                            </h1>
+                            <p className="text-gray-600 dark:text-gray-400">
+                                Official guidance and rules from the Income Tax Department of India.
+                            </p>
+                            <a href="https://incometaxindia.gov.in/pages/tutorials.aspx" target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 mt-2 inline-block font-medium">
+                                Source: incometaxindia.gov.in
+                            </a>
+                        </div>
+
+                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {tutorials.map((tutorial, index) => (
+                                <div key={index} className="bg-surface p-6 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl hover:translate-y-[-4px] transition-all duration-300">
+                                    <div className="flex items-center mb-4">
+                                        <div className="w-12 h-12 bg-gray-50 dark:bg-gray-800 rounded-lg flex items-center justify-center mr-3 shadow-inner">
+                                            {tutorial.icon}
+                                        </div>
+                                        <h3 className="text-lg font-bold text-gray-900 dark:text-white leading-tight">{tutorial.title}</h3>
+                                    </div>
+                                    <p className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3 min-h-[40px]">
+                                        {tutorial.description}
+                                    </p>
+                                    <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed border-t border-gray-100 dark:border-gray-800 pt-3">
+                                        {tutorial.fullText}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                );
             case 'slabs':
                 return (
                     <div className="animate-fadeIn">
@@ -282,6 +374,7 @@ export function Taxation() {
         <div className="max-w-6xl mx-auto">
             <div className="flex gap-2 overflow-x-auto pb-4 mb-6 scrollbar-hide">
                 {[
+                    { id: 'tutorials', label: 'Tutorials', icon: <BookOpen className="w-4 h-4" /> },
                     { id: 'slabs', label: 'Tax Guide & Slabs', icon: <FileText className="w-4 h-4" /> },
                     { id: 'calculator', label: 'Tax Calculator', icon: <Calculator className="w-4 h-4" /> },
                     { id: 'deductions', label: 'Deductions (80C)', icon: <PieChart className="w-4 h-4" /> },
@@ -292,8 +385,8 @@ export function Taxation() {
                         key={tab.id}
                         onClick={() => setActiveTab(tab.id)}
                         className={`flex items-center gap-2 px-4 py-2 rounded-full whitespace-nowrap transition-all ${activeTab === tab.id
-                                ? 'bg-black text-white dark:bg-white dark:text-black shadow-lg scale-105'
-                                : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700'
+                            ? 'bg-black text-white dark:bg-white dark:text-black shadow-lg scale-105'
+                            : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700'
                             }`}
                     >
                         {tab.icon}

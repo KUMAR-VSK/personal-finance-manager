@@ -69,6 +69,11 @@ import { Taxation } from './components/features/Taxation';
 import { TaxCalculator } from './components/features/TaxCalculator';
 import { RetirementCalculator } from './components/features/RetirementCalculator';
 import { TradingViewWidget } from './components/common/TradingViewWidget';
+import { LumpsumCalculator } from './components/features/LumpsumCalculator';
+import { SWPCalculator } from './components/features/SWPCalculator';
+import { HRACalculator } from './components/features/HRACalculator';
+import { InflationCalculator } from './components/features/InflationCalculator';
+import { SSYCalculator } from './components/features/SSYCalculator';
 
 // Reusable Donut Chart Component
 
@@ -129,6 +134,11 @@ function App() {
     strategy: <InvestmentStrategy />,
     risk: <RiskAssessment />,
     tips: <FinanceTips />,
+    lumpsum: <LumpsumCalculator />,
+    swp: <SWPCalculator />,
+    hra: <HRACalculator />,
+    inflation: <InflationCalculator />,
+    ssy: <SSYCalculator />,
   };
 
   return (
@@ -206,6 +216,15 @@ function App() {
                   >
                     🧮 Tax Calculator
                   </button>
+                  <button
+                    onClick={() => setCurrentSection('hra')}
+                    className={`w-full text-left px-4 py-2 rounded-lg text-xs font-medium transition-all duration-200 ${currentSection === 'hra'
+                      ? 'bg-gray-200 text-black shadow-sm'
+                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                      }`}
+                  >
+                    🏠 HRA Calculator
+                  </button>
                 </div>
               )}
             </div>
@@ -260,7 +279,7 @@ function App() {
             <div>
               <button
                 onClick={() => setIsInvestmentDropdownOpen(!isInvestmentDropdownOpen)}
-                className={`w-full text-left px-5 py-3.5 rounded-xl text-sm font-semibold transition-all duration-300 flex items-center justify-between ${currentSection === 'sip' || currentSection === 'mutual' || currentSection === 'stocks' || currentSection === 'fd' || currentSection === 'ppf' || currentSection === 'nps'
+                className={`w-full text-left px-5 py-3.5 rounded-xl text-sm font-semibold transition-all duration-300 flex items-center justify-between ${currentSection === 'sip' || currentSection === 'lumpsum' || currentSection === 'swp' || currentSection === 'ssy' || currentSection === 'mutual' || currentSection === 'stocks' || currentSection === 'fd' || currentSection === 'ppf' || currentSection === 'nps'
                   ? 'bg-black text-white shadow-soft scale-105'
                   : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100 hover:shadow-soft'
                   }`}
@@ -288,6 +307,33 @@ function App() {
                       }`}
                   >
                     SIP Calculator
+                  </button>
+                  <button
+                    onClick={() => setCurrentSection('lumpsum')}
+                    className={`w-full text-left px-3 py-2 rounded text-xs ${currentSection === 'lumpsum'
+                      ? 'bg-blue-200 text-blue-900'
+                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                      }`}
+                  >
+                    Lumpsum Calculator
+                  </button>
+                  <button
+                    onClick={() => setCurrentSection('swp')}
+                    className={`w-full text-left px-3 py-2 rounded text-xs ${currentSection === 'swp'
+                      ? 'bg-blue-200 text-blue-900'
+                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                      }`}
+                  >
+                    SWP Calculator
+                  </button>
+                  <button
+                    onClick={() => setCurrentSection('ssy')}
+                    className={`w-full text-left px-3 py-2 rounded text-xs ${currentSection === 'ssy'
+                      ? 'bg-blue-200 text-blue-900'
+                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                      }`}
+                  >
+                    SSY Calculator
                   </button>
                   <button
                     onClick={() => setCurrentSection('mutual')}
@@ -415,7 +461,7 @@ function App() {
             <div>
               <button
                 onClick={() => setIsToolsDropdownOpen(!isToolsDropdownOpen)}
-                className={`w-full text-left px-5 py-3.5 rounded-xl text-sm font-semibold transition-all duration-300 flex items-center justify-between ${currentSection === 'emi' || currentSection === 'retirement' || currentSection === 'emergency' || currentSection === 'compound' || currentSection === 'cagr' || currentSection === 'taxSaving' || currentSection === 'deductions' || currentSection === 'filing' || currentSection === 'gst' || currentSection === 'tds'
+                className={`w-full text-left px-5 py-3.5 rounded-xl text-sm font-semibold transition-all duration-300 flex items-center justify-between ${currentSection === 'emi' || currentSection === 'inflation' || currentSection === 'retirement' || currentSection === 'emergency' || currentSection === 'compound' || currentSection === 'cagr' || currentSection === 'taxSaving' || currentSection === 'deductions' || currentSection === 'filing' || currentSection === 'gst' || currentSection === 'tds'
                   ? 'bg-black text-white shadow-soft scale-105'
                   : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100 hover:shadow-soft'
                   }`}
@@ -443,6 +489,15 @@ function App() {
                       }`}
                   >
                     EMI Calculator
+                  </button>
+                  <button
+                    onClick={() => setCurrentSection('inflation')}
+                    className={`w-full text-left px-3 py-2 rounded text-xs ${currentSection === 'inflation'
+                      ? 'bg-orange-200 text-orange-900'
+                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                      }`}
+                  >
+                    Inflation Calculator
                   </button>
                   <button
                     onClick={() => setCurrentSection('retirement')}
