@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Calculator, Shield } from 'lucide-react';
-import { SimpleSliderInput as SliderInput } from '../ui/SliderInput';
+import { SliderInput } from '../ui/SliderInput';
 import { DonutChart } from '../ui/DonutChart';
 
 export function NPSCalculator() {
